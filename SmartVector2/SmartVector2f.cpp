@@ -123,9 +123,14 @@ eVector2f eVector2f::operator-() const {
 }
 
 eVector2f& eVector2f::rotate(float angle) {
+    float currLen = this->len();
     float s = sin(angle);
     float c = cos(angle);
     x = x*c - y*s;
+    y = x*s + y*c;
+    eVector2f temp = this->norm()*currLen;
+    x = temp.x;
+    y = temp.y;
     return *this;
 }
 
